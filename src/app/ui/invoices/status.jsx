@@ -4,14 +4,11 @@ import clsx from 'clsx';
 export default function InvoiceStatus({ status }) {
   return (
     <span
-      className={clsx(
-        'inline-flex items-center rounded-full px-2 py-1 text-xs',
-        {
-          'bg-gray-100 text-gray-500': status === 'pending',
-          'bg-green-500 text-white': status === 'paid',
-        },
-      )}
-    >
+      className={clsx('inline-flex items-center rounded-full px-2 py-1 text-xs', {
+        'bg-gray-100 text-gray-500': status === 'pending',
+        'bg-green-500 text-white': status === 'paid',
+        'bg-red-500 text-white': status === 'late',
+      })}>
       {status === 'pending' ? (
         <>
           Pending
@@ -21,6 +18,12 @@ export default function InvoiceStatus({ status }) {
       {status === 'paid' ? (
         <>
           Paid
+          <CheckIcon className="ml-1 w-4 text-white" />
+        </>
+      ) : null}
+      {status === 'late' ? (
+        <>
+          Late
           <CheckIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
